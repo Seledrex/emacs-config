@@ -157,6 +157,7 @@
   (put-clojure-indent 'ANY 2)
   (put-clojure-indent 'PUT 2)
   (put-clojure-indent 'after 1)
+  (put-clojure-indent 'addtest 1)
   (put-clojure-indent 'after-all 1)
   (put-clojure-indent 'around 1)
   (put-clojure-indent 'without-logging 0)
@@ -514,9 +515,9 @@
  '(markdown-command "/usr/local/bin/markdown")
  '(package-selected-packages
    (quote
-    (adoc-mode aggressive-indent bea beacon cider clj-refactor clojure-mode clojure-snippets company expand-region git-timemachine hcl-mode helm helm-projectile htmlize json-mode lorem-ipsum magit magit-gh-pulls markdown-mode multiple-cursors olivetti paredit projectile rainbow-delimiters which-key yasnippet zenburn-theme
-               (quote
-                (recentf-max-menu-items 100))))))
+    (ejson-mode adoc-mode aggressive-indent bea beacon cider clj-refactor clojure-mode clojure-snippets company expand-region git-timemachine hcl-mode helm helm-projectile htmlize json-mode lorem-ipsum magit magit-gh-pulls markdown-mode multiple-cursors olivetti paredit projectile rainbow-delimiters which-key yasnippet zenburn-theme
+                (quote
+                 (recentf-max-menu-items 100))))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -623,6 +624,12 @@
 
 ;; I'm blind. So sue me.
 (set-face-attribute 'default nil :height 175)
+
+;; Turn on recentf-mode for reopening recently used files:
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(setq recentf-max-saved-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 (provide 'init)
 (put 'upcase-region 'disabled nil)
