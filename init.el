@@ -622,8 +622,9 @@
 ;; suppress irritating terminal warnings:
 (setenv "PAGER" "cat")
 
-;; I'm blind. So sue me.
-(set-face-attribute 'default nil :height 125)
+;; 125 for Linux
+;; 175 for Mac
+(set-face-attribute 'default nil :height 175)
 
 ;; Turn on recentf-mode for reopening recently used files:
 (recentf-mode 1)
