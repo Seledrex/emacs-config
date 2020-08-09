@@ -3,6 +3,7 @@
   (delq nil (mapcar (lambda (x) (and (funcall pred x) x)) lst)))
 
 (require 'package)
+;;(require 'define-symbol-prop)
 (add-to-list 'package-archives
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
@@ -10,8 +11,6 @@
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (package-initialize)
-
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (defvar my-packages)
 (setq my-packages
@@ -40,7 +39,8 @@
         hcl-mode
 	json-mode
 	which-key
-	zenburn-theme))
+	zenburn-theme
+        flycheck-clj-kondo))
 
 
 ;; Install missing packages:
@@ -623,7 +623,7 @@
 (setenv "PAGER" "cat")
 
 ;; I'm blind. So sue me.
-(set-face-attribute 'default nil :height 175)
+(set-face-attribute 'default nil :height 125)
 
 ;; Turn on recentf-mode for reopening recently used files:
 (recentf-mode 1)
@@ -634,3 +634,30 @@
 (provide 'init)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+
+;; Scrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-follow-mouse 't)
+(setq scroll-step 1)
+
+;; Tab width css
+(setq css-indent-offset 2)
+
+;; HTML close tags
+(setq sgml-quick-keys 'close)
+
+;; Friendlier shortcut for selecting a sexp
+(global-set-key (kbd "C-s-SPC") 'mark-sexp)
+
+;; flycheck-clj-kondo: https://github.com/borkdude/flycheck-clj-kondo
+(require 'flycheck-clj-kondo)
+
+;; Tab width JSON
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
+
+;; Use json-mode for JSON files
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
