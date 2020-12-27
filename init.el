@@ -135,13 +135,13 @@
 (defun highlight-long-lines ()
   "Turn on highlighting of long lines."
   (interactive)
-  (highlight-lines-matching-regexp ".\\{81\\}" 'hi-pink))
+  (highlight-lines-matching-regexp ".\\{121\\}" 'hi-pink))
 
 
 (defun unhighlight-long-lines ()
   "Turn off highlighting of long lines."
   (interactive)
-  (unhighlight-regexp "^.*\\(?:.\\{81\\}\\).*$"))
+  (unhighlight-regexp "^.*\\(?:.\\{121\\}\\).*$"))
 
 
 ;; Clojure mode hooks.............................................
