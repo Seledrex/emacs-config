@@ -514,10 +514,8 @@
  '(magit-push-always-verify nil)
  '(markdown-command "/usr/local/bin/markdown")
  '(package-selected-packages
-   (quote
-    (ejson-mode adoc-mode aggressive-indent bea beacon cider clj-refactor clojure-mode clojure-snippets company expand-region git-timemachine hcl-mode helm helm-projectile htmlize json-mode lorem-ipsum magit magit-gh-pulls markdown-mode multiple-cursors olivetti paredit projectile rainbow-delimiters which-key yasnippet zenburn-theme
-                (quote
-                 (recentf-max-menu-items 100))))))
+   '(ejson-mode adoc-mode aggressive-indent bea beacon cider clj-refactor clojure-mode clojure-snippets company expand-region git-timemachine hcl-mode helm helm-projectile htmlize json-mode lorem-ipsum magit magit-gh-pulls markdown-mode multiple-cursors olivetti paredit projectile rainbow-delimiters which-key yasnippet zenburn-theme
+                '(recentf-max-menu-items 100))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
