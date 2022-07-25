@@ -24,6 +24,7 @@
 	clj-refactor
 	git-timemachine
 	helm
+        helm-ag
 	helm-projectile
 	hideshow
         htmlize
@@ -35,10 +36,12 @@
 	paredit
 	projectile
 	rainbow-delimiters
+        scss-mode
 	yasnippet
         hcl-mode
 	json-mode
 	which-key
+        yaml-mode
 	zenburn-theme
         flycheck-clj-kondo))
 
@@ -404,7 +407,7 @@
 ;; do want paredit though.
 (define-key emacs-lisp-mode-map (kbd "<s-return>") 'eval-last-sexp)
 
-;;(add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+(add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
 ;;(add-hook 'emacs-lisp-mode-hook 'auto-indent-mode)
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
@@ -420,7 +423,7 @@
 ;; fe7997bc6e05647a935e279094a9c571d175e2dc/modules/prelude-company.el
 (require 'company)
 
-(setq company-idle-delay 0.5)
+(setq company-idle-delay 0.1)
 (setq company-tooltip-limit 10)
 (setq company-minimum-prefix-length 2)
 ;; invert the navigation direction if the the completion popup-isearch-match
@@ -514,10 +517,8 @@
  '(magit-push-always-verify nil)
  '(markdown-command "/usr/local/bin/markdown")
  '(package-selected-packages
-   (quote
-    (ejson-mode adoc-mode aggressive-indent bea beacon cider clj-refactor clojure-mode clojure-snippets company expand-region git-timemachine hcl-mode helm helm-projectile htmlize json-mode lorem-ipsum magit magit-gh-pulls markdown-mode multiple-cursors olivetti paredit projectile rainbow-delimiters which-key yasnippet zenburn-theme
-                (quote
-                 (recentf-max-menu-items 100))))))
+   '(ejson-mode adoc-mode aggressive-indent bea beacon cider clj-refactor clojure-mode clojure-snippets company expand-region git-timemachine hcl-mode helm helm-projectile htmlize json-mode lorem-ipsum magit magit-gh-pulls markdown-mode multiple-cursors olivetti paredit projectile rainbow-delimiters which-key yasnippet zenburn-theme
+                '(recentf-max-menu-items 100))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -624,7 +625,7 @@
 
 ;; 125 for Linux
 ;; 175 for Mac
-(set-face-attribute 'default nil :height 175)
+(set-face-attribute 'default nil :height 150)
 
 ;; Turn on recentf-mode for reopening recently used files:
 (recentf-mode 1)
@@ -653,6 +654,7 @@
 
 ;; flycheck-clj-kondo: https://github.com/borkdude/flycheck-clj-kondo
 (require 'flycheck-clj-kondo)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Tab width JSON
 (add-hook 'json-mode-hook
@@ -662,3 +664,29 @@
 
 ;; Use json-mode for JSON files
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+
+;; Yaml mode settings
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+(global-set-key (kbd "C-o a") 'helm-do-ag-project-root)
+
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (string= (file-name-extension buffer-file-name) "scss")
+              (electric-pair-mode +1))))
+
+(add-hook 'text-mode-hook #'auto-fill-mode)
+(add-hook 'prog-mode-hook #'auto-fill-mode)
+(setq-default fill-column 80)
+
+;; Turn off bell sound
+(setq ring-bell-function #'ignore)
+
+(add-to-list 'exec-path "/usr/local/bin")
+
+(provide 'init)
+;;; init.el ends here
