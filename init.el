@@ -463,7 +463,7 @@
 
 ;; Org Mode...................
 (require 'org)
-(require 'org-install)
+;;(require 'org-install)
 (require 'ob-tangle)
 (org-babel-do-load-languages
  'org-babel-load-languages '((shell . t)
@@ -625,7 +625,7 @@
 
 ;; 125 for Linux
 ;; 175 for Mac
-(set-face-attribute 'default nil :height 150)
+(set-face-attribute 'default nil :height 125)
 
 ;; Turn on recentf-mode for reopening recently used files:
 (recentf-mode 1)
